@@ -42,11 +42,13 @@
 #define NUM_IREF_DATA_TO_PCA9956 (NUM_CHANNEL_FROM_PCA9956 * NUM_AN_OF_NEED_IREF)          // number of iref need sent to a pca9956
 #define NUM_PWM_DATA_TO_PCA9956 (NUM_CHANNEL_FROM_PCA9956 * NUM_AN_OF_NEED_PWM)            // number of pwm need sent to a pca9956
 #define NUM_TOTAL_DATA_TO_PCA9956 (NUM_IREF_DATA_TO_PCA9956 + NUM_PWM_DATA_TO_PCA9956)     // number of total datas(iref & pwm) need sent to a pca9956
+#define PCA9955B_OUTPUTS 15
+#define PCA9956_OUTPUTS 24
 
 // pca type and addr for pca initialize in pca.cpp
 // an (NUM_PCA * 2) 2D array of int type
 // each row of the array refer to one pca
-// On each row, the first element means the type of pca, 
+// On each row, the first element means the type of pca,
 // where value equals to 9955 refering to PCA9955B and that of 9956 refering to PCA9956
 // the second element means the I2C address of pca, which will be value between 0 ~ 127
 const int pcaTypeAddr[NUM_PCA][2] = {

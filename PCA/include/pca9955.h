@@ -14,9 +14,7 @@
 #define PCA9955_H
 
 #include "pca995X.h"
-
-// PCA9955 definitions
-#define PCA9955_CHANNELS 15
+#include "pcaDefinition.h"
 
 class PCA9955 : public PCA995X {
    public:
@@ -24,9 +22,8 @@ class PCA9955 : public PCA995X {
     ~PCA9955(){};
     PCA9955(int Address) : PCA995X(Address){};
 
-   protected:
     bool CheckChannelLegal(int channel);
-    int GetChannelNum();
+    int GetLedChannelNum();
 };
 
 #endif /* PCA9955_H */
