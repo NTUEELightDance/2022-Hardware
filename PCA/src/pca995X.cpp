@@ -19,14 +19,6 @@
 
 using namespace std;
 
-enum PCA9955Reg {
-    PCA9955_REG_PWMALL = 0x42,
-    PCA9955_REF_IREFALL = 0x43,
-};
-enum PCA9956Reg {
-    PCA9956_REG_PWMALL = 0x3f,
-    PCA9956_REF_IREFALL = 0x40,
-};
 union i2c_smbus_data {
     uint8_t byte;
     uint16_t word;
