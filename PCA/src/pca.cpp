@@ -19,9 +19,9 @@ PCA::PCA() {
 
     for (int i = 0; i < NUM_PCA; i++)
         if (pcaTypeAddr[i][0] == _PCA9955B)
-            PCAs[0] = PCA9955(pcaTypeAddr[i][1]);
+            PCAs[i] = PCA9955(pcaTypeAddr[i][1]);
         else
-            PCAs[0] = PCA9956(pcaTypeAddr[i][1]);
+            PCAs[i] = PCA9956(pcaTypeAddr[i][1]);
 };
 
 int PCA::WriteAll(std::vector<std::vector<char>> &data) {
