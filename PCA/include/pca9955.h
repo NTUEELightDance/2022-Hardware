@@ -24,6 +24,8 @@ class PCA9955 : public PCA995X {
 
     bool CheckChannelLegal(int channel);
     int GetLedChannelNum();
+    int GetIREF0Reg();
+    int GetPWM0Reg();
 };
 
 #endif /* PCA9955_H */

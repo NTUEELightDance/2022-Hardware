@@ -23,15 +23,11 @@
 #define VALUE(x) (static_cast<int>(x))
 #define CHANNEL(x) (static_cast<int>(x))
 
-#define PCA995X_IREF0_ADDR 0x22
-#define PCA995X_PWM0_ADDR 0x0a
-
 #define IREF_MAX 255
 #define IREF_MIN 0
 #define PWM_MAX 255
 #define PWM_MIN 0
 
-#define AUTO_INCREMENT 128
 
 // Base class for PCA9955 & PCA9956
 class PCA995X {
@@ -52,6 +48,8 @@ class PCA995X {
 
     virtual bool CheckChannelLegal(int channel){ return true; };
     virtual int GetLedChannelNum(){ return 0; };
+    virtual int GetIREF0Reg(){ return 0; };
+    virtual int GetPWM0Reg(){ return 0; };
 
    protected:
     int SetPWM(int channel, int PWM);

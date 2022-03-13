@@ -9,3 +9,9 @@ bool PCA9956::CheckChannelLegal(int channel) {
 int PCA9956::GetLedChannelNum() {
     return NUM_CHANNEL_FROM_PCA9956;
 };
+int PCA9956::GetIREF0Reg() {
+    return PCA9956_IREF0_ADDR;
+};
+int PCA9956::GetPWM0Reg() {
+    return PCA9956_PWM0_ADDR;
+};

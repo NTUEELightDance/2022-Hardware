@@ -1,4 +1,5 @@
 #include "../include/pca995X.h"
+#include "../include/pcaDefinition.h"
 
 #include <asm/ioctl.h>
 #include <errno.h>
@@ -16,6 +17,8 @@
 
 #define I2C_SMBUS_BLOCK_DATA 5  // SMBus-level access
 #define I2C_SMBUS 0x0720
+
+#define AUTO_INCREMENT 1<<7
 
 using namespace std;
 
@@ -45,7 +48,7 @@ int PCA995X::SetPWMAI(int channel, int *PWM, int size) {
 
     struct i2c_smbus_ioctl_data args;
     args.rw = 0;
-    args.cmd = channel + PCA995X_PWM0_ADDR + AUTO_INCREMENT;
+    args.cmd = channel + GetPWM0Reg() + AUTO_INCREMENT;
     args.size = I2C_SMBUS_BLOCK_DATA;
     args.data = &regData;
 
@@ -63,7 +66,7 @@ int PCA995X::SetIREFAI(int channel, int *IREF, int size) {
 
     struct i2c_smbus_ioctl_data args;
     args.rw = 0;
-    args.cmd = channel + PCA995X_IREF0_ADDR + AUTO_INCREMENT;
+    args.cmd = channel + GetIREF0Reg() + AUTO_INCREMENT;
     args.size = I2C_SMBUS_BLOCK_DATA;
     args.data = &regData;
 
@@ -85,8 +88,8 @@ int PCA995X::SetRGB(int led_address, int Rduty, int Gduty, int Bduty, int Riref,
     IREF[0] = Riref;
     IREF[1] = Giref;
     IREF[2] = Biref;
-    int temp01 = SetPWMAI(led_address * 3 + PCA995X_PWM0_ADDR, PWM, 3);
-    int temp02 = SetIREFAI(led_address * 3 + PCA995X_IREF0_ADDR, IREF, 3);
+    int temp01 = SetPWMAI(led_address * NUM_AN_OF_NEED_PWM + GetPWM0Reg(), PWM, NUM_AN_OF_NEED_PWM);
+    int temp02 = SetIREFAI(led_address * NUM_AN_OF_NEED_IREF + GetIREF0Reg(), IREF, NUM_AN_OF_NEED_IREF);
     return temp01 && temp02;
 };
 void PCA995X::GetAll() {
@@ -98,21 +101,21 @@ int PCA995X::SetPWM(int channel, int PWM) {
     if (!CheckChannelLegal(channel)) return false;
     PWM = PWM < PWM_MIN ? PWM_MIN : PWM > PWM_MAX ? PWM_MAX
                                                   : PWM;
-    return I2CWriteReg(channel + PCA995X_PWM0_ADDR, PWM);
+    return I2CWriteReg(channel + GetPWM0Reg(), PWM);
 };
 int PCA995X::GetPWM(int channel) {
     if (!CheckChannelLegal(channel)) return false;
-    return I2CReadReg(channel + PCA995X_PWM0_ADDR);
+    return I2CReadReg(channel + GetPWM0Reg());
 };
 int PCA995X::SetIREF(int channel, int IREF) {
     if (!CheckChannelLegal(channel)) return false;
     IREF = IREF < IREF_MIN ? IREF_MIN : IREF > IREF_MAX ? IREF_MAX
                                                         : IREF;
-    return I2CWriteReg(channel + PCA995X_IREF0_ADDR, IREF);
+    return I2CWriteReg(channel + GetIREF0Reg(), IREF);
 };
 int PCA995X::GetIREF(int channel) {
     if (!CheckChannelLegal(channel)) return false;
-    return I2CReadReg(channel + PCA995X_IREF0_ADDR);
+    return I2CReadReg(channel + GetIREF0Reg());
 };
 int PCA995X::I2CWriteReg(int reg, int value) {
     return wiringPiI2CWriteReg8(fd, reg, value);

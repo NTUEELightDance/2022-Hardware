@@ -15,18 +15,24 @@
 // PCA(OF) I2C address
 #define PCA_ADDR_1 0x20
 #define PCA_ADDR_2 0x22
-#define PCA_ADDR_3 0x40
-#define PCA_ADDR_4 0x60
+#define PCA_ADDR_3 0x3f
+#define PCA_ADDR_4 0x23
 
 // PCA(OF) types
 #define PCA_TYPE_1 9955
 #define PCA_TYPE_2 9956
 #define PCA_TYPE_3 9955
-#define PCA_TYPE_4 9955
+#define PCA_TYPE_4 9956
 
 // PCA type
 #define _PCA9956 9956
 #define _PCA9955B 9955
+
+// PCA special addr
+#define PCA9956_IREF0_ADDR 0x22
+#define PCA9956_PWM0_ADDR 0x0a
+#define PCA9955B_IREF0_ADDR 0x18
+#define PCA9955B_PWM0_ADDR 0x08
 
 // numbers of pca data needed
 #define NUM_PCA 4                                                                          // number of PCA used
