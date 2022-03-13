@@ -70,8 +70,8 @@ int PCA995X::SetIREFAI(int channel, int *IREF, int size) {
     return ioctl(fd, I2C_SMBUS, &args) && SetIREF(channel, IREF[0]);
 };
 int PCA995X::SetPWMIREFAI(int *data) {
-    SetPWMAI(0, data, GetChannelNum());
-    SetIREFAI(0, &data[GetChannelNum()], GetChannelNum());
+    SetPWMAI(0, data, GetLedChannelNum());
+    SetIREFAI(0, &data[GetLedChannelNum()], GetLedChannelNum());
 
     return 0;
 };
@@ -90,7 +90,7 @@ int PCA995X::SetRGB(int led_address, int Rduty, int Gduty, int Bduty, int Riref,
     return temp01 && temp02;
 };
 void PCA995X::GetAll() {
-    for (int i = 0; i < GetChannelNum(); i++) {
+    for (int i = 0; i < GetLedChannelNum(); i++) {
         cout << "addr : " << i << ", IREF : " << GetIREF(i) << ", PWM : " << GetPWM(i) << endl;
     }
 };

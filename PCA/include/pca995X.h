@@ -50,8 +50,8 @@ class PCA995X {
 
     int Getfd() { return fd; };
 
-    virtual bool CheckChannelLegal(int channel){};
-    virtual int GetLedChannelNum(){};
+    virtual bool CheckChannelLegal(int channel){ return true; };
+    virtual int GetLedChannelNum(){ return 0; };
 
    protected:
     int SetPWM(int channel, int PWM);
